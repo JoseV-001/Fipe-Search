@@ -21,7 +21,7 @@ public class FipeService {
         this.referenciaRepository = referenciaRepository;
     }
 
-    @Cacheable
+    @Cacheable(sync = true)
     public ConsultaFipeDTO consultar(Long modeloId, Integer anoModelo) {
         LOGGER.debug("Cache MISS — consultando PostgreSQL: modelo={}, ano={}", modeloId, anoModelo);
 
@@ -39,6 +39,6 @@ public class FipeService {
 
     @CacheEvict
     public void invalidar(Long modeloId, Integer anoModelo) {
-        LOGGER.debug("Cache invalidado: modelo={}, ano={}", modeloId, anoModelo);
+        LOGGER.debug("Cache MISS - consultando PostgreSQL: modelo={}, ano={}", modeloId, anoModelo);
     }
 }
