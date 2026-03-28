@@ -25,6 +25,8 @@ public class FipeService {
     public ConsultaFipeDTO consultar(Long modeloId, Integer anoModelo) {
         LOGGER.debug("Cache MISS — consultando PostgreSQL: modelo={}, ano={}", modeloId, anoModelo);
 
+        referenciaRepository.simulateDelay();
+
         return referenciaRepository
                 .findReferencias(modeloId, anoModelo)
                 .stream()
